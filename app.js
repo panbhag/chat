@@ -6,9 +6,11 @@ const server = http.createServer(app);
 const {Server} = require('socket.io');
 const io = new Server(server);
 
+const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379"
+
 const redis = require('redis');
 
-let redisSubscriber = redis.createClient();
+let redisSubscriber = redis.createClient({url:REDIS_URL});
 redisSubscriber.connect();
 
 
